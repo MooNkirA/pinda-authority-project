@@ -24,5 +24,7 @@
         <module>pd-parent</module>
         <module>pd-apps</module>
         <module>pd-tools</module>
+        <!-- 技术示例 -->
+        <module>pd-examples</module>
     </modules>
 </project>

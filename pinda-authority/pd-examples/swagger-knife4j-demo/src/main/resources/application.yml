@@ -1,0 +1,15 @@
+example:
+  swagger:
+    enabled: true # 是否启用swagger
+    title: knife4j 在线文档
+    description: 我的在线文档
+    version: 1.0.1
+    docket:
+      user:
+        title: 用户模块
+        group: 用户模块组
+        base-package: com.moon.examples.knife4j.controller.user
+      menu:
+        title: 菜单模块
+        group: 菜单模块组
+        base-package: com.moon.examples.knife4j.controller.menu
