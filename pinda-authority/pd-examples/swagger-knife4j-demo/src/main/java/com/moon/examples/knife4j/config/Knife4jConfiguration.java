@@ -76,20 +76,17 @@ public class Knife4jConfiguration implements BeanFactoryAware {
             for (Map.Entry<String, SwaggerProperties.DocketInfo> entry : entries) {
                 SwaggerProperties.DocketInfo docketInfo = entry.getValue();
                 ApiInfo apiInfo = new ApiInfoBuilder()
-                        //页面标题
-                        .title(docketInfo.getTitle())
-                        //创建人
+                        .title(docketInfo.getTitle()) // 页面标题
                         .contact(new Contact(docketInfo.getContact().getName(),
                                 docketInfo.getContact().getUrl(),
-                                docketInfo.getContact().getEmail()))
-                        //版本号
-                        .version(docketInfo.getVersion())
-                        //描述
-                        .description(docketInfo.getDescription())
+                                docketInfo.getContact().getEmail()))  // 创建人
+                        .version(docketInfo.getVersion()) // 版本号
+                        .description(docketInfo.getDescription()) // 描述
                         .build();
+
                 // base-path处理
-                // 当没有配置任何path的时候，解析/**
                 if (docketInfo.getBasePath().isEmpty()) {
+                    // 当没有配置任何path的时候，解析/**
                     docketInfo.getBasePath().add(BASE_PATH);
                 }
                 List<Predicate<String>> basePath = new ArrayList<>();
@@ -107,7 +104,7 @@ public class Knife4jConfiguration implements BeanFactoryAware {
                         .apiInfo(apiInfo)
                         .groupName(docketInfo.getGroup())
                         .select()
-                        //为当前包路径
+                        // 为当前包路径
                         .apis(RequestHandlerSelectors.basePackage(docketInfo.getBasePackage()))
                         .paths(Predicates.and(Predicates.not(Predicates.or(excludePath)), Predicates.or(basePath)))
                         .build();

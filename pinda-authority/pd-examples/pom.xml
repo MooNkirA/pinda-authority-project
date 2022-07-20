@@ -20,6 +20,7 @@
     <modules>
         <module>swagger-demo</module>
         <module>swagger-knife4j-demo</module>
+        <module>pd-tools-swagger2-demo</module>
     </modules>
 
 </project>

@@ -1,0 +1,7 @@
+pinda:
+  swagger:
+    enabled: true # 是否启用swagger
+    title: pd-tools-swagger2 在线文档
+    description: pd-tools-swagger2 模块测试生成在线文档
+    version: 2.0.0
+    basePackage: com.moon.examples.tools
