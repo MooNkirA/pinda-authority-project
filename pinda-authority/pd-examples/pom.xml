@@ -21,6 +21,12 @@
         <module>swagger-demo</module>
         <module>swagger-knife4j-demo</module>
         <module>pd-tools-swagger2-demo</module>
+        <module>dozer-demo</module>
+        <module>pd-tools-dozer-demo</module>
+        <module>pd-tools-validator-demo</module>
+        <module>antisamy-demo</module>
+        <module>pd-tools-xss-demo</module>
+        <module>spring-event-demo</module>
     </modules>
 
 </project>

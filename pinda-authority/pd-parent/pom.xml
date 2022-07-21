@@ -141,6 +141,7 @@
 
 
         <hutool.version>5.1.0</hutool.version>
+        <!-- TODO: 后面将 AntiSamy 替换成 1.6.8 版本，当前版本可能存在漏洞 -->
         <antisamy.version>1.5.7</antisamy.version>
         <caffeine.version>2.8.0</caffeine.version>
         <ip2region.version>1.7.2</ip2region.version>
