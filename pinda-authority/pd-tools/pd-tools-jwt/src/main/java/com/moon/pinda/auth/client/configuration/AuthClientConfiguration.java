@@ -9,10 +9,9 @@ import org.springframework.context.annotation.Bean;
 /**
  * 客户端认证配置
  */
-@EnableConfigurationProperties(value = {
-        AuthClientProperties.class,
-})
+@EnableConfigurationProperties(value = {AuthClientProperties.class})
 public class AuthClientConfiguration {
+
     @Bean
     public JwtTokenClientUtils getJwtTokenClientUtils(AuthClientProperties authClientProperties) {
         return new JwtTokenClientUtils(authClientProperties);

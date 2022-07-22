@@ -87,7 +87,7 @@ public class SysLogAspect {
 
             // 类名
             sysLog.setClassPath(joinPoint.getTarget().getClass().getName());
-            //获取执行的方法名
+            // 获取执行的方法名
             sysLog.setActionMethod(joinPoint.getSignature().getName());
 
 

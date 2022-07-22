@@ -27,6 +27,12 @@
         <module>antisamy-demo</module>
         <module>pd-tools-xss-demo</module>
         <module>spring-event-demo</module>
+        <module>pd-tools-log-demo</module>
+        <module>jwt-demo</module>
+        <module>pd-tools-jwt-demo</module>
+        <module>argument-resolver-demo</module>
+        <module>pd-tools-user-demo</module>
+        <module>j2cache-demo</module>
     </modules>
 
 </project>
