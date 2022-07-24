@@ -35,7 +35,7 @@ public class MenuController {
     public List<Menu> getMenus() {
         Menu menu = new Menu();
         menu.setId(100);
-        menu.setName("itcast");
+        menu.setName("Java");
         List<Menu> list = new ArrayList<>();
         list.add(menu);
         return list;
