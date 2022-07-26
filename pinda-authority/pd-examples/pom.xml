@@ -33,6 +33,7 @@
         <module>argument-resolver-demo</module>
         <module>pd-tools-user-demo</module>
         <module>j2cache-demo</module>
+        <module>easy-captcha-demo</module>
     </modules>
 
 </project>
