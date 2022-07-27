@@ -4,8 +4,12 @@ import com.moon.pinda.authority.biz.service.auth.ValidateCodeService;
 import com.moon.pinda.common.constant.CacheKey;
 import com.moon.pinda.exception.BizException;
 import com.wf.captcha.ArithmeticCaptcha;
+import com.wf.captcha.ChineseCaptcha;
+import com.wf.captcha.GifCaptcha;
+import com.wf.captcha.SpecCaptcha;
 import com.wf.captcha.base.Captcha;
 import net.oschina.j2cache.CacheChannel;
+import net.oschina.j2cache.CacheObject;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -60,4 +64,62 @@ public class ValidateCodeServiceImpl implements ValidateCodeService {
         captcha.out(response.getOutputStream());
     }
 
+    /**
+     * 校验验证码
+     *
+     * @param key   前端上送 key
+     * @param value 前端上送待校验值
+     */
+    @Override
+    public boolean check(String key, String value) {
+        // 校验
+        if (StringUtils.isBlank(key)) {
+            throw BizException.validFail("请输入验证码");
+        }
+
+        // 根据 key 从缓存中获取验证码
+        CacheObject cacheObject = cache.get(CacheKey.CAPTCHA, key);
+        Object captcha = cacheObject.getValue();
+        // 缓存中无值，则代表 key 已过期
+        if (captcha == null) {
+            throw BizException.validFail("验证码已过期");
+        }
+
+        // 比较是否一致
+        if (!StringUtils.equalsIgnoreCase(value, String.valueOf(captcha))) {
+            throw BizException.validFail("验证码不正确");
+        }
+
+        // TODO: 目前是验证通过，立即从缓存中删除验证码。待优化，其实不合理
+        cache.evict(CacheKey.CAPTCHA, key);
+        return true;
+    }
+
+    // 暂无使用
+    private Captcha createCaptcha(String type) {
+        Captcha captcha = null;
+        if (StringUtils.equalsIgnoreCase(type, "gif")) {
+            captcha = new GifCaptcha(115, 42, 4);
+        } else if (StringUtils.equalsIgnoreCase(type, "png")) {
+            captcha = new SpecCaptcha(115, 42, 4);
+        } else if (StringUtils.equalsIgnoreCase(type, "arithmetic")) {
+            captcha = new ArithmeticCaptcha(115, 42);
+        } else if (StringUtils.equalsIgnoreCase(type, "chinese")) {
+            captcha = new ChineseCaptcha(115, 42);
+        }
+        captcha.setCharType(2);
+        return captcha;
+    }
+
+    // 暂无使用
+    private void setHeader(HttpServletResponse response, String type) {
+        if (StringUtils.equalsIgnoreCase(type, "gif")) {
+            response.setContentType(MediaType.IMAGE_GIF_VALUE);
+        } else {
+            response.setContentType(MediaType.IMAGE_PNG_VALUE);
+        }
+        response.setHeader(HttpHeaders.PRAGMA, "No-cache");
+        response.setHeader(HttpHeaders.CACHE_CONTROL, "No-cache");
+        response.setDateHeader(HttpHeaders.EXPIRES, 0L);
+    }
 }

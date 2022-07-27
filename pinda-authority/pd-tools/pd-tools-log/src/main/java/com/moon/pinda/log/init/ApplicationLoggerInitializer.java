@@ -12,7 +12,7 @@ public class ApplicationLoggerInitializer implements ApplicationContextInitializ
     @Override
     public void initialize(ConfigurableApplicationContext applicationContext) {
         ConfigurableEnvironment environment = applicationContext.getEnvironment();
-        String logBase = environment.getProperty("logging.path", "/data/projects/logs");
+        String logBase = environment.getProperty("logging.path", "E:/logs/pinda");
         String appName = environment.getProperty("spring.application.name");
         // spring boot admin 直接加载日志
         System.setProperty("logging.file", String.format("%s/%s/root.log", logBase, appName));
