@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <!-- 引入pd-tools-log模块中提供的日志的基础配置 -->
+    <include resource="com/moon/pinda/log/logback/pinda-defaults.xml"/>
+
+    <!-- 设置多个环境使用的配置，分别是 test,docker,prod -->
+    <springProfile name="test,docker,prod">
+        <logger name="com.moon.pinda.zuul" additivity="true" level="INFO">
+            <appender-ref ref="ASYNC_CONTROLLER_APPENDER"/>
+        </logger>
+    </springProfile>
+    <!-- 设置 dev 环境使用的配置 -->
+    <springProfile name="dev">
+        <logger name="com.moon.pinda.zuul" additivity="true" level="INFO">
+            <appender-ref ref="CONTROLLER_APPENDER"/>
+        </logger>
+    </springProfile>
+</configuration>
