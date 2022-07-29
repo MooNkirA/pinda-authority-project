@@ -1,0 +1,6 @@
+# JWT相关配置
+authentication:
+  user:
+    expire: 3600 # 令牌失效时间
+    priKey: keys/pri.key # 私钥
+    pubKey: keys/pub.key # 公钥
